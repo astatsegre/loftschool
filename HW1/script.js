@@ -1,7 +1,9 @@
+"use strict"
+
 //// обычная функция
 
 
-consoleRec = function(arr, zero){
+let consoleRec = function(arr, zero){
     
     if (zero < arr.length) {
         console.log(arr[zero]);

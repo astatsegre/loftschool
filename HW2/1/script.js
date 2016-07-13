@@ -1,3 +1,5 @@
+"use strict"
+
 let allNumbers = [1, 2, 4, 5, 6, 7, 8],
     someNumbers = [1, 2, 'привет', 4, 5, 'loftschool', 6, 7, 8],
     noNumbers = ['это', 'массив', 'без', 'чисел'],
@@ -28,7 +30,7 @@ function isAllTrue(source, filterFn) {
     }
     
     catch (e) {
-        console.log('Все очень плохо! У нас пустой массив!')
+        console.log(e.message)
         } 
 }
 
