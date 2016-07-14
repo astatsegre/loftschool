@@ -69,8 +69,4 @@ let slice = function(arr, begin, end) {
 //let newSlice = slice(firstArray, 2, 5);
 //console.log(newSlice);
 
-let reduce = function (arr, reduceFunc);
-
-let result = reduceFunc(previousValue, currentItem, index, arr);
-previousValue = result;
 
