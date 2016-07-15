@@ -10,7 +10,7 @@ let forEach = function (arr, callbackFunc) {
     }
 }
 
-let firstArray = [1,2,3,4,5,6,7,7];
+let firstArray = [1,2,3,4,5];
 
 //forEach(firstArray, item => console.log(item));
 
@@ -50,7 +50,6 @@ let map = function(arr, mapFunc){
 }
 
 //let sqare = map(firstArray, item => item*item);
-//
 //console.log(sqare);
 
 let slice = function(arr, begin, end) {
@@ -66,7 +65,30 @@ let slice = function(arr, begin, end) {
     return newArr;
 }
 
-//let newSlice = slice(firstArray, 2, 5);
-//console.log(newSlice);
+//let checkSlice = slice(firstArray, 2, 5);
+//console.log(checkSlice);
 
+
+let reduce = function (arr, reduceFunc, zero, result) {
+    
+    if (zero < (arr.length - 1)) {
+        if (zero === 0) {
+            var result = arr[0];
+        }
+        let previousValue = result;
+        let currentValue = arr[zero + 1];
+
+        result = reduceFunc(previousValue, currentValue);
+
+        zero++;
+
+        return reduce(arr, reduceFunc, zero, result);
+    }
+    return result;
+}
+
+//let concatArr = reduce(firstArray, function(previousValue, currentValue) {
+//  return previousValue + currentValue;
+//}, 0);
+//console.log(concatArr);
 
