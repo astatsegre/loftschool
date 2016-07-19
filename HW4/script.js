@@ -33,15 +33,33 @@ let deleteTextNodes = function(element){
 
 let deleteTextNodesRec = function(element, init) {
     
-    if (element.childNodes[init] == 3) {
-        element.removeChild(element.childNodes[init]);
-    } else {
-        if (element.childNodes[init].childNodes.length == 0) {
-        } else {
-            init++;
-            deleteTextNodesRec(element, init);
-        }
-    }
+    if (init < element.childNodes.length){
     
+        if (element.childNodes[init].nodeType == 3) {
+            element.removeChild(element.childNodes[init]);
+            return deleteTextNodesRec(element, init);
+            
+        } else {
+            if (element.childNodes[init].childNodes.length == 0) {
+                init++;
+                return deleteTextNodesRec(element, init);
+            } else {
+                element = element.childNodes[init];
+                init = 0;
+                return deleteTextNodesRec(element, init);
+            }
+        }
+    } else
+    
+    return element;   
 }
+
+console.log(document.body.childNodes);
+
+let withNoTextNOdes = deleteTextNodesRec(document.body, 0);
+
+console.log(withNoTextNOdes.childNodes);
+console.log(withNoTextNOdes.childNodes[1].childNodes);
+
+
 
