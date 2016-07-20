@@ -44,22 +44,35 @@ let deleteTextNodesRec = function(element, init) {
                 init++;
                 return deleteTextNodesRec(element, init);
             } else {
+                let tempElement = element;
+                let tempInit = init;
                 element = element.childNodes[init];
                 init = 0;
+                deleteTextNodesRec(element, init);
+                element = tempElement;
+                init = tempInit;
+                init++;
                 return deleteTextNodesRec(element, init);
             }
         }
-    } else
-    
-    return element;   
+    } else {
+        
+       return element;
+}
 }
 
 console.log(document.body.childNodes);
 
-let withNoTextNOdes = deleteTextNodesRec(document.body, 0);
+let withNoTextNodes = deleteTextNodesRec(document.body, 0);
 
-console.log(withNoTextNOdes.childNodes);
-console.log(withNoTextNOdes.childNodes[1].childNodes);
+console.log(withNoTextNodes.childNodes);
+console.log(withNoTextNodes.childNodes[1].childNodes);
+
+
+
+
+
+
 
 
 
