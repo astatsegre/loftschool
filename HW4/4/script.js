@@ -1,34 +1,65 @@
 "use strict"
 
-let scanDOM = function() {
-    let searchTags = function(element, init) {
+let scanDOM = function(element) {
+    let result = {};
+    let searchTags = function(element, init, result) {
         
-        let currentTagName = element.children[init].tagName,
-            result = {};
-        if (`${currentTagName}` == true) {
-            result[`${currentTagName}`] = `${currentTagName}` + 1;
-        } else {
-            result[`${currentTagName}`] = 1;
+        if (init === undefined) {
+            init = 0;
         }
         
+        if (init < element.children.length) {
+            
+            if (element.children[init].children.length != 0) {
+                let currentTagName = element.children[init].tagName;
+                
+                if (`${currentTagName}` in result == true) {
+                    result[`${currentTagName}`] += 1;
+                } else {
+                    result[`${currentTagName}`] = 1;
+                }
+                let currentElement = element.children[init],
+                    currentInit = 0;
+                searchTags(currentElement, currentInit, result);
+            } else {
+            
+                let currentTagName = element.children[init].tagName;
+                
+                if (`${currentTagName}` in result == true) {
+                    result[`${currentTagName}`] += 1;
+                    init++
+                    searchTags(element, init, result);
+                } else {
+                    result[`${currentTagName}`] = 1;
+                    init++
+                    searchTags(element, init, result);
+                }
+            }
+        } else {
+            return result;
+        }
         
     }
+    
+    searchTags(element, undefined, result);
+    return result;
 }
 
-// let five = 'age';
-// 
-// let result = {
-//     age: 25,
-// };
-//
-//console.log(result[`${five}`]);
-//
-//console.log('age' in result);
+console.log( scanDOM(document.body) );
 
 
 
-
-
+//    let scanDOM = function(element) {
+//        let result = {}
+//        let searchTags = function(element, init, result) {
+//            
+//            console.log(element, init, result);
+//        }
+//        
+//        searchTags(element, undefined, result);
+//    }
+//    
+//    scanDOM(document.body);
 
 
 
