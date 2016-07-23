@@ -1,0 +1,78 @@
+* {
+    font-family: "Fira sans";
+    font-size: 15px;
+}
+
+.container {
+    width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+a {
+    position: relative;
+    display: block;
+    color: white;
+    background-color: #696666;
+    font-weight: 600;
+    padding: 13px 22px;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 15px;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.funcions-link,
+.objects-link {
+    background-color: #e7e7e7;
+    color: #4f4f4f;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+.rectangle {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: url(img/rect-1.png) no-repeat;
+    top: 17px;
+    right: 21px;
+    z-index: 10;
+}
+
+.accordeon > div {
+    position: relative;
+}
+
+ul {
+    display: none;
+    list-style: none;
+    text-align: left;
+    background-color: #e7e7e7;
+    padding: 50px 0px 10px 22px;
+    color: #4f4f4f;
+    font-weight: 200;
+    border-radius: 30px;
+    margin-top: -50px;
+}
+
+.content ul li {
+    padding: 5px 0;
+}
+
+.unhide {
+    display: block;
+}
+
+.active {
+    background-color: #ff8663;
+    color: white;
+}
+
+.rectangle-active {
+    background: url(img/rect-2.png) no-repeat;
+}

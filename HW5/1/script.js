@@ -4,7 +4,7 @@ let accordeon = document.querySelector(".accordeon");
 
 console.log(accordeon)
 
-accordeon.addEventListener('click', function(e){
+accordeon.addEventListener('click', (e) => {
     e.preventDefault();
     
     let target = e.target;
