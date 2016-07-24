@@ -2,6 +2,10 @@
 
 let deleteTextNodesRec = function(element, init) {
     
+    if (init === undefined) {
+        var init = 0;
+    }
+    
     if (init < element.childNodes.length){
     
         if (element.childNodes[init].nodeType == 3) {

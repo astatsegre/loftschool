@@ -35,10 +35,43 @@ let scanDOM = function(element) {
         } else {
             return result;
         }
-        
     }
     
+    
+    let searchTextNodes = function(element, init, result) {
+        
+    if (init === undefined) {
+        var init = 0;
+        result.TEXT = 0;
+    }
+    
+    if (init < element.childNodes.length){
+    
+        if (element.childNodes[init].nodeType == 3) {
+            result.TEXT += 1;
+            init++;
+            return searchTextNodes(element, init, result);
+            
+        } else {
+            if (element.childNodes[init].childNodes.length == 0) {
+                init++;
+                return searchTextNodes(element, init, result);
+            } else {             
+                let innerElement = element.childNodes[init];
+                let innerInit = 0;
+                searchTextNodes(innerElement, innerInit, result);
+                init++;
+                return searchTextNodes(element, init, result);
+            }
+        }
+    } else {
+        
+       return result;
+    }
+}
+    
     searchTags(element, undefined, result);
+    searchTextNodes(element, undefined, result);
     return result;
 }
 
