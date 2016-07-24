@@ -33,6 +33,7 @@ document.addEventListener('mouseup', (e) => {
 
 document.addEventListener('mousemove', (e) => {
     activeElement.style.top = e.clientY - offsetY + 'px';
+    activeElement.style.left = e.clientX - offsetX + 'px';
 })
 
 
