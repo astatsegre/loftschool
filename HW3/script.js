@@ -57,6 +57,14 @@ let slice = function(arr, begin, end) {
     let b = 0;
     let newArr = [];
     
+    if (begin < 0) {
+        begin = arr.length + begin;
+    }
+    
+    if (end < 0) {
+        end = arr.length + end;
+    }
+    
     for (let i = begin; i < end; i++) {
         newArr[b] = arr[i];
         b++;
@@ -65,30 +73,70 @@ let slice = function(arr, begin, end) {
     return newArr;
 }
 
-//let checkSlice = slice(firstArray, 2, 5);
+//let checkSlice = slice(firstArray, -4, -2);
 //console.log(checkSlice);
 
 
-let reduce = function (arr, reduceFunc, zero, result) {
+let reduce = function (arr, reduceFunc, initialValue, result, i) {
     
-    if (zero < (arr.length - 1)) {
-        if (zero === 0) {
+    if (initialValue === undefined) {
+        if (i === undefined) {
+            let i = 0;
             var result = arr[0];
+            let currentValue = arr[i + 1];
+            let previousValue = result;
+
+            result = reduceFunc(previousValue, currentValue);
+
+            i++;
+
+            return reduce(arr, reduceFunc, initialValue, result, i);
+        } 
+        if (i < arr.length - 1) {
+        
+            let previousValue = result;
+            let currentValue = arr[i + 1];
+
+            result = reduceFunc(previousValue, currentValue);
+
+            i++;
+
+            return reduce(arr, reduceFunc, initialValue, result, i);
+        } else {
+            return result;
         }
-        let previousValue = result;
-        let currentValue = arr[zero + 1];
+        
+    } else {
+        if (i === undefined) {
+            var i = -1;
+            var result = initialValue;
+            let currentValue = arr[0];
+            let previousValue = result;
+            
+            result = reduceFunc(previousValue, currentValue);
 
-        result = reduceFunc(previousValue, currentValue);
+            i++;
 
-        zero++;
+            return reduce(arr, reduceFunc, initialValue, result, i);
+        }
+        
+         if (i < arr.length - 1) {
+            let previousValue = result;
+            let currentValue = arr[i + 1];
 
-        return reduce(arr, reduceFunc, zero, result);
+            result = reduceFunc(previousValue, currentValue);
+
+            i++;
+
+            return reduce(arr, reduceFunc, initialValue, result, i);
+         } else {
+             return result;
+         }
     }
-    return result;
+    
 }
 
 //let concatArr = reduce(firstArray, function(previousValue, currentValue) {
 //  return previousValue + currentValue;
-//}, 0);
+//}, -10);
 //console.log(concatArr);
-
