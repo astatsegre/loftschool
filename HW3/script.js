@@ -57,23 +57,31 @@ let slice = function(arr, begin, end) {
     let b = 0;
     let newArr = [];
     
+    if (end === undefined) {
+        end = arr.length + 1;
+    };
+    
+    if (begin === undefined) {
+        begin = 0;
+    }
+    
     if (begin < 0) {
         begin = arr.length + begin;
-    }
+    };
     
     if (end < 0) {
         end = arr.length + end;
-    }
+    };
     
     for (let i = begin; i < end; i++) {
         newArr[b] = arr[i];
         b++;
-    }
+    };
     
     return newArr;
 }
 
-//let checkSlice = slice(firstArray, -4, -2);
+//let checkSlice = slice(firstArray);
 //console.log(checkSlice);
 
 
