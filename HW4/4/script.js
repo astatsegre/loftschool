@@ -70,12 +70,64 @@ let scanDOM = function(element) {
     }
 }
     
+    
+    
+    let searchClasses = function(element, init, result) {
+        
+        if (init === undefined) {
+            init = 0;
+    };
+      
+        if (element.children[init] != undefined) {
+            if (element.children[init].classList.length == 1) {
+                let currentClass = element.children[init].classList[0];
+                if (`${currentClass}` in result == true) {
+                    result[`${currentClass}`] += 1;
+                } else {
+                    result[`${currentClass}`] = 1;
+                }
+                
+            } else if (element.children[init].classList.length > 1) {
+                for (let i = 0; i < element.children[init].classList.length; i++) {
+                    let currentClass = element.children[init].classList[i];
+                        if (`${currentClass}` in result == true) {
+                            result[`${currentClass}`] += 1;
+                        } else {
+                            result[`${currentClass}`] = 1;
+                        }
+                    }
+                }
+            }
+        
+        if (init < element.children.length) {
+            
+            if (element.children[init].children.length != 0) {
+                
+                let currentElement = element.children[init],
+                    currentInit = 0;
+                searchClasses(currentElement, currentInit, result);
+                init++;
+                searchClasses(element, init, result);
+            } else {
+                init++;
+                searchClasses(element, init, result);
+            }
+        } else {
+            return result;
+        }
+        }
+    
     searchTags(element, undefined, result);
     searchTextNodes(element, undefined, result);
+    searchClasses(element, undefined, result);
     return result;
 }
 
 console.log( scanDOM(document.body) );
+
+module.exports = scanDOM;
+
+
 
 
 
