@@ -18,13 +18,15 @@ let showCookie = function() {
         cookieValue[i] = splitedItem[1];
     })
 
-//    let fragment = document.createDocumentFragment(),
+    let fragment = document.createDocumentFragment();
 
     for (let i = 0; i < cookieName.length; i++) {
         let tr = document.createElement('tr');
         tr.innerHTML = `<td>${cookieName[i]}</td> <td>${cookieValue[i]}</td> <td><button>Удалить!</button></td>`;
-        table.appendChild(tr);
+        fragment.appendChild(tr);
     }
+    
+    table.appendChild(fragment);
 };
 
 let clearCookieTable = function() {
