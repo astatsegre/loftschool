@@ -20,7 +20,51 @@ new Promise ( (resolve, reject) => {
         if (response.error) {
             reject( new Error(response.error.error_msg) );
         } else {
-            console.log(response);
+            
+            let sortFriendsByBD = function(a, b) {
+                if (a.bdate === undefined) {
+                    return 1;
+                };
+
+                if (b.bdate === undefined) {
+                    return -1;
+                };
+
+                if (a.bdate.length < 8) {
+                    return 1;
+                };
+
+                if (b.bdate.length <8) {
+                    return -1;
+                };
+
+                let splitedBDA = a.bdate.split('.');
+                let splitedBDB = b.bdate.split('.');
+
+                if (splitedBDA[2] > splitedBDB[2]) {
+                    return -1;
+                } else if(splitedBDA[2] < splitedBDB[2]) {
+                    return 1;
+                } else {
+                    if (splitedBDA[1] > splitedBDB[1]) {
+                        return -1;
+                    } else if (splitedBDA[1] < splitedBDB[1]) {
+                        return 1;
+                    } else {
+                        if (splitedBDA[0] > splitedBDB[0]) {
+                        return -1;
+                    } else if (splitedBDA[0] < splitedBDB[0]) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                    }
+
+                };
+            };
+       
+            response.response.sort(sortFriendsByBD);
+
             let source = document.getElementById('friendsList').innerHTML,
                 templateFn = Handlebars.compile(source),
                 template = templateFn({list: response.response});
@@ -30,5 +74,48 @@ new Promise ( (resolve, reject) => {
         }
     })
 })
+
+
+let sortFriendsByBD = function(a, b) {
+    if (a.bdate === undefined) {
+        return -1;
+    };
+    
+    if (b.bdate === undefined) {
+        return 1;
+    };
+    
+    if (a.bdate.length < 8) {
+        return -1;
+    };
+    
+    if (b.bdate.length <8) {
+        return 1;
+    };
+    
+    let splitedBDA = a.bdate.split('.');
+    let splitedBDB = b.bdate.split('.');
+    
+    if (splitedBDA[2] > splitedBDB[2]) {
+        return 1;
+    } else if(splitedBDA[2] < splitedBDB[2]) {
+        return -1;
+    } else {
+        if (splitedBDA[1] > splitedBDB[1]) {
+            return 1;
+        } else if (splitedBDA[1] < splitedBDB[1]) {
+            return -1;
+        } else {
+            if (splitedBDA[0] > splitedBDB[0]) {
+            return 1;
+        } else if (splitedBDA[0] < splitedBDB[0]) {
+            return -1;
+        } else {
+            return 1;
+        }
+        }
+    
+    };
+}
 
 

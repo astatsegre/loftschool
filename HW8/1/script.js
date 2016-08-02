@@ -1,7 +1,6 @@
 "use strict"
-let results = document.getElementById('results');
-console.log(results)
-let input = document.querySelector('input'),
+let results = document.getElementById('results'),
+    input = document.querySelector('input'),
     p = new Promise( (resolve, reject) => {
     let xhr = new XMLHttpRequest();
 
@@ -23,8 +22,6 @@ p.then(response => {
     let source = document.getElementById('cityTemplate').innerHTML,
         templateFn = Handlebars.compile(source),
         template = templateFn({city: response});
-    console.log(results);
-    console.log(response);
     
     results.innerHTML = template;
 });
