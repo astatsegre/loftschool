@@ -8,6 +8,9 @@ document.cookie = "sex=male";
 document.cookie = "country=russia";
 
 let showCookie = function() {
+    
+    if (document.cookie == "") return;
+    
     let cookies = document.cookie.split(';'),
         cookieName = [],
         cookieValue = [];
@@ -49,7 +52,7 @@ document.addEventListener('click', e => {
             date = new Date;
 
         if (userAnswer === true) {
-            date.setDate(date.getDate() + -1);
+            date.setDate(date.getDate() -1);
             document.cookie = `${currentCookieName}=${currentCookieValue}; expires=${date.toGMTString()}`;
             clearCookieTable();
             showCookie();
