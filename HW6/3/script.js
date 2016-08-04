@@ -38,7 +38,7 @@ input.addEventListener('input', () => {
     
     let inputValue = input.value;
     
-    for (let i = 2; i < (document.body.children.length - 2); i++) {
+    for (let i = 2; i < (document.body.children.length); i++) {
         let currentCity = document.body.children[i].innerHTML;
         if (currentCity.indexOf(inputValue) != -1) {
             document.body.children[i].style.display='block';
