@@ -19,6 +19,13 @@ let results = document.getElementById('results'),
 
 p.then(response => {
     
+    console.log(response);
+    response.sort( (a, b) => {
+        if(a.name > b.name) return 1;
+        if(a.name < b.name) return -1;
+    });
+    console.log(response);
+
     let source = document.getElementById('cityTemplate').innerHTML,
         templateFn = Handlebars.compile(source),
         template = templateFn({city: response});
@@ -33,7 +40,7 @@ input.addEventListener('input', () => {
     
     for (let i = 0; i < (results.children.length); i++) {
         let currentCity = results.children[i].innerHTML;
-        if (currentCity.indexOf(inputValue) != -1) {
+        if (currentCity.toLowerCase().indexOf(inputValue.toLowerCase()) != -1) {
             results.children[i].style.display='block';
         } else {
             results.children[i].style.display='none';
