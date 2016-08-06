@@ -40,7 +40,7 @@ input.addEventListener('input', () => {
     
     for (let i = 2; i < (document.body.children.length); i++) {
         let currentCity = document.body.children[i].innerHTML;
-        if (currentCity.indexOf(inputValue) != -1) {
+        if (currentCity.toLowerCase().indexOf(inputValue.toLowerCase()) != -1) {
             document.body.children[i].style.display='block';
         } else {
             document.body.children[i].style.display='none';
