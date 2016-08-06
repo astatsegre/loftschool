@@ -8,9 +8,9 @@ document.cookie = "sex=male";
 document.cookie = "country=russia";
 
 let showCookie = function() {
-    
+
     if (document.cookie == "") return;
-    
+
     let cookies = document.cookie.split(';'),
         cookieName = [],
         cookieValue = [];
@@ -28,7 +28,7 @@ let showCookie = function() {
         tr.innerHTML = `<td>${cookieName[i]}</td> <td>${cookieValue[i]}</td> <td><button>Удалить!</button></td>`;
         fragment.appendChild(tr);
     }
-    
+
     table.appendChild(fragment);
 };
 
@@ -43,9 +43,9 @@ let clearCookieTable = function() {
 showCookie();
 
 document.addEventListener('click', e => {
-    
+
     if (e.target.tagName == 'BUTTON') {
-    
+
         let currentCookieName = e.target.parentElement.previousElementSibling.previousElementSibling.innerHTML,
             currentCookieValue = e.target.parentElement.previousElementSibling.innerHTML,
             userAnswer = confirm(`Удалить cookie с именем ${currentCookieName} ?`),
@@ -59,33 +59,33 @@ document.addEventListener('click', e => {
         }
     } else if (e.target.getAttribute('name') == 'submit') {
         e.preventDefault();
-        
+
         let nameValue = document.forms[0].name.value,
             valueValue = document.forms[0].value.value,
             expiresValue = document.forms[0].expires.value,
             date = new Date;
-        
+
         console.log(nameValue);
         console.log(valueValue);
         console.log(expiresValue);
-        
+
         if (nameValue == '' || valueValue == '' || expiresValue == '') {
             alert('Заполните все поля формы');
             return
         }
-        
+
         date.setDate(date.getDate() + +expiresValue);
-        
+
         document.cookie = `${nameValue}=${valueValue}; expires=${date.toGMTString()}`;
-        
+
         document.forms[0].name.value = '';
         document.forms[0].value.value = '';
         document.forms[0].expires.value = '';
-        
+
         clearCookieTable();
         showCookie();
-        
+
     }
-    
+
 })
 

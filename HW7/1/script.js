@@ -8,9 +8,9 @@ document.cookie = "country=russia";
 
 let table = document.querySelector('table'),
     showCookies = function() {
-        
+
         if (document.cookie == "") return;
-        
+
         let cookies = document.cookie.split(';'),
         cookieName = [],
         cookieValue = [];
@@ -28,7 +28,7 @@ let table = document.querySelector('table'),
         tr.innerHTML = `<td>${cookieName[i]}</td> <td>${cookieValue[i]}</td> <td><button>Удалить!</button></td>`;
         table.appendChild(tr);
     }
-    
+
 };
 
 let clearCookieTable = function() {
@@ -44,21 +44,21 @@ showCookies();
 
 
 document.addEventListener('click', e => {
-    
+
     if (e.target.tagName != 'BUTTON') return
-    
+
     let currentCookieName = e.target.parentElement.previousElementSibling.previousElementSibling.innerHTML,
         currentCookieValue = e.target.parentElement.previousElementSibling.innerHTML,
         userAnswer = confirm(`Удалить cookie с именем ${currentCookieName} ?`),
         date = new Date;
-    
+
     if (userAnswer === true) {
         date.setDate(date.getDate() + -1);
         document.cookie = `${currentCookieName}=${currentCookieValue}; expires=${date.toGMTString()}`;
     }
-    
+
     clearCookieTable();
     showCookies();
     console.log(document.cookie)
-    
+
 })
