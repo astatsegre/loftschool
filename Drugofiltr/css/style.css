@@ -200,8 +200,10 @@ footer button {
 }
 
 footer button:active {
-    outline: 0;
-    border: 0;
     background-color: #ca6548;
+}
+
+footer button:focus {
+    outline: 0;
 }
 
