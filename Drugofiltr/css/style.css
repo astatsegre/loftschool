@@ -81,6 +81,8 @@ body {
     margin: 0;
     font-family: 'Fira Sans', sans-serif;
     font-size: 12px;
+    line-height: 12px;
+    font-weight: 500;
 }
 
 .background {
@@ -129,6 +131,10 @@ header > span {
     font-weight: normal;
 }
 
+.icon-cancel-header {
+    font-size: 16px;
+}
+
 .search-field {
     height: 45px;
     background-color: #f0f0f0;
@@ -166,7 +172,7 @@ header > span {
 
 .left-list,
 .right-list {
-    width: 308px;
+    width: 307px;
     height: 100%;
     display: inline-block;
     background-color: white;
@@ -205,5 +211,47 @@ footer button:active {
 
 footer button:focus {
     outline: 0;
+}
+
+.left-list-friends,
+.right-list-friends {
+/*    outline: 1px solid black;*/
+    margin-left: 15px;
+    min-height: 100px;
+    overflow: auto;
+/*    overflow-x: visible;*/
+    height: 323px;
+}
+
+.friend {
+    height: 59px;
+/*    outline: 1px solid red;*/
+    vertical-align: middle;
+    border: 1px solid white;
+    position: relative;
+}
+
+.friend-photo {
+    border-radius: 50%;
+    position: absolute;
+    left: 6px;
+    top: 8px;
+}
+
+.friend-name {
+    vertical-align: middle;
+    display: inline-block;
+    position: absolute;
+    left: 58px;
+    top: 25px;
+}
+
+.icon-plus-friend {
+    position: absolute;
+    top: 20px;
+    right: 7px;
+    color: #c4c4c4;
+    font-size: 20px;
+    cursor: pointer;
 }
 
