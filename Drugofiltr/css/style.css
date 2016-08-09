@@ -231,6 +231,10 @@ footer button:focus {
     position: relative;
 }
 
+.friend:hover {
+    background-color: #f0f0f0;
+}
+
 .friend-photo {
     border-radius: 50%;
     position: absolute;
