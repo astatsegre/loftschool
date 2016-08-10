@@ -250,7 +250,8 @@ footer button:focus {
     top: 25px;
 }
 
-.icon-plus-friend {
+.icon-plus-friend,
+.icon-cancel-friend {
     position: absolute;
     top: 20px;
     right: 7px;
