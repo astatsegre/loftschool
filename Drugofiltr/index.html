@@ -128,7 +128,7 @@
     <script src="js/script.js"></script>
     <script type="text/x-handlebars-template" id="friendsList">
         {{#each leftList}}
-            <div class="friend" id="{{user_id}}">
+            <div class="friend" data-friend-id="{{user_id}}" data-position="left">
                <img class="friend-photo" src="{{photo_50}}" alt="friend-photo" width="45" height="45">
                <span class="friend-name">{{first_name}} {{last_name}}</span>
                <i class="icon-plus icon-plus-friend"></i>
@@ -136,7 +136,7 @@
         {{/each}}
 
         {{#each rightList}}
-            <div class="friend" id="{{user_id}}">
+            <div class="friend" data-friend-id="{{user_id}}" data-position="left">
                <img class="friend-photo" src="{{photo_50}}" alt="friend-photo" width="45" height="45">
                <span class="friend-name">{{first_name}} {{last_name}}</span>
                <i class="icon-cancel icon-cancel-friend"></i>
