@@ -1,7 +1,10 @@
 let leftListFriends = document.querySelector('.left-list-friends'),
     rightListFriends = document.querySelector('.right-list-friends'),
     searchLeft = document.querySelector('.search-left'),
-    searchRight = document.querySelector('.search-right');
+    searchRight = document.querySelector('.search-right'),
+    currentElement,
+    offsetX = 0,
+    offsetY = 0;
 
 
 new Promise(function(resolve, reject){
@@ -101,8 +104,27 @@ document.addEventListener('click', (e) => {
         friendsWithCurrentId[0].dataset.position = 'left';
         friendsWithCurrentId[1].dataset.position = 'left';
         }
+});
 
-})
+document.addEventListener('mousedown', (e) => {
+    
+   
+    currentElement = e.target;
+    offsetX = e.offsetX;
+    offsetY = e.offsetY;
+    
+    if (currentElement.className != 'friend') return;
+    
+    
+});
+
+document.addEventListener('mouseup', (e) => {
+    currentElement = undefined;
+});
+
+document.addEventListener('mousemove', (e) => {
+    
+});
 
 
 
