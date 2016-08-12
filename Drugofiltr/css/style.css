@@ -217,18 +217,22 @@ footer button:focus {
 .right-list-friends {
     margin-left: 15px;
     min-height: 100px;
+    width: 292px;
     overflow: auto;
     height: 323px;
     position: relative;
+    overflow-x: hidden;
 }
 
 .friend {
     height: 59px;
     width: 290px;
-    vertical-align: middle;
+/*    vertical-align: middle;*/
     border: 1px solid white;
     position: relative;
     background-color: white;
+    line-height: 59px;
+    vertical-align: middle
 }
 
 .friend:hover {
@@ -237,24 +241,26 @@ footer button:focus {
 
 .friend-photo {
     border-radius: 50%;
-    position: absolute;
-    left: 6px;
-    top: 8px;
+    display: inline-block;
+    line-height: 59px;
+    vertical-align: top;
+    margin-top: 8px;
 }
 
 .friend-name {
-    vertical-align: middle;
+    vertical-align: top;
     display: inline-block;
-    position: absolute;
-    left: 58px;
-    top: 25px;
+    width: 180px;
+    line-height: 59px;
+    margin-left: 15px;
 }
 
 .icon-plus-friend,
 .icon-cancel-friend {
-    position: absolute;
-    top: 20px;
-    right: 7px;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 0;
+    line-height: 59px;
     color: #c4c4c4;
     font-size: 20px;
     cursor: pointer;

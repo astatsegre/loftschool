@@ -112,33 +112,89 @@ document.addEventListener('mousedown', (e) => {
     console.log(offsetX)
     console.log(offsetY)
     
-    if (currentElement.className != 'friend') return;
-    
-    offsetX = e.offsetX;
-    offsetY = e.offsetY;
-    
-    currentElement.style.position = 'fixed';
-    currentElement.style.zIndex = '100'
+    if (currentElement.className == 'friend') {
+        offsetX = e.offsetX;
+        offsetY = e.offsetY;
+
+        currentElement.style.position = 'fixed';
+        currentElement.style.zIndex = '100';
+    } else if (currentElement.className == 'friend-photo') {
+        
+        offsetX = e.offsetX;
+        offsetY = e.offsetY;
+
+        currentElement.parentNode.style.position = 'fixed';
+        currentElement.parentNode.style.zIndex = '100';
+    } else if (currentElement.className == 'friend-name') {
+        
+        offsetX = e.offsetX;
+        offsetY = e.offsetY;
+
+        currentElement.parentNode.style.position = 'fixed';
+        currentElement.parentNode.style.zIndex = '100';
+    } else if (currentElement.className == 'icon-plus') {
+        
+        offsetX = e.offsetX;
+        offsetY = e.offsetY;
+
+        currentElement.parentNode.style.position = 'fixed';
+        currentElement.parentNode.style.zIndex = '100';
+    }
     
 });
 
 document.addEventListener('mouseup', (e) => {
-    currentElement = undefined;
+    
+    let currentClientWidth = document.body.clientWidth,
+        halfCurrentClientWidth = currentClientWidth / 2,
+        target = e.target,
+        currentClassName = target.className,
+        currentFriendID = target.dataset.friendId,
+        friendsWithCurrentId = document.querySelectorAll(`div[data-friend-id='${currentFriendID}']`);
+    
+    console.log(target);
+    console.log(currentClassName);
+    console.log(currentFriendID);
+    console.log(friendsWithCurrentId);
+    
+    
+    if (e.clientX > halfCurrentClientWidth) {
+        friendsWithCurrentId[0].style.display = 'none';
+        friendsWithCurrentId[1].style.display = 'block';
+        friendsWithCurrentId[0].dataset.position = 'right';
+        friendsWithCurrentId[1].dataset.position = 'right';
+        friendsWithCurrentId[0].style.position = 'static';
+        friendsWithCurrentId[1].style.position = 'static';
+        currentElement = undefined;
+    } else if (e.clientX < halfCurrentClientWidth) {
+        friendsWithCurrentId[0].style.display = 'block';
+        friendsWithCurrentId[1].style.display = 'none';
+        friendsWithCurrentId[0].dataset.position = 'left';
+        friendsWithCurrentId[1].dataset.position = 'left';
+        friendsWithCurrentId[0].style.position = 'static';
+        friendsWithCurrentId[1].style.position = 'static';
+        currentElement = undefined;
+    }
+    
+    
+    
+    console.log(currentElement);
 });
 
 document.addEventListener('mousemove', (e) => {
+    
+    
+//    
+//    console.log(currentClientWidth);
+//    console.log(halfCurrentClientWidth);
     
     if (currentElement.className != 'friend') return;
     
     currentElement.style.top = e.clientY - offsetY + 'px';
     currentElement.style.left = e.clientX - offsetX + 'px';
     
-    if (e.clientX < 215) {
-        currentElement.style.left = 215 - offsetX + 'px';
-    } else if (e.clientX > 835) {
-        currentElement.style.left = 835 - offsetX + 'px';
-        
-    } else if (e.clientY < 255) {
+    
+    if (e.clientY < 255) {
         currentElement.style.top = 255 - offsetY + 'px';
     } else if (e.clientY > 577) {
        currentElement.style.top = 577 - offsetY + 'px'; 
