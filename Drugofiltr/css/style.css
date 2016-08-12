@@ -121,6 +121,7 @@ header > span {
     line-height: 45px;
 }
 
+/*
 .icon-cancel {
     color: white;
     position: absolute;
@@ -130,6 +131,7 @@ header > span {
     font-style: normal;
     font-weight: normal;
 }
+*/
 
 .icon-cancel-header {
     font-size: 16px;

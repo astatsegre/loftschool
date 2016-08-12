@@ -4,25 +4,25 @@ let leftListFriends = document.querySelector('.left-list-friends'),
     searchRight = document.querySelector('.search-right'),
     currentElement,
     offsetX = 0,
-    offsetY = 0;
+    offsetY = 0,
+    p = new Promise(function(resolve, reject){
 
+            VK.init({
+            apiId: 5572145
 
-new Promise(function(resolve, reject){
+        });
 
-    VK.init({
-    apiId: 5572145
-});
+            VK.Auth.login(response => {
+                if(response.session) {
+                    resolve();
+                } else {
+                    alert('Не удалось авторизироваться');
+                    reject();
+                }
 
-VK.Auth.login(response => {
-    if(response.session) {
-        resolve();
-    } else {
-        alert('Не удалось авторизироваться');
-        reject();
-    }
-
-}, 2);
-}).then(() => {
+            }, 2);
+        });
+p.then(() => {
     VK.api('friends.get', {'fields': 'photo_50'}, response => {
     if(response.error) {
         alert(response.error.error_msg);
@@ -42,11 +42,41 @@ VK.Auth.login(response => {
 
         for (let i = 0; i < rightListFriends.children.length; i++) {
             rightListFriends.children[i].style.display = 'none';
-        }
+        };
+
+        let leftListBeforeStorage = document.querySelectorAll('.left-list-friends .friend'),
+            rightListBeforeStorage = document.body.querySelectorAll('.right-list-friends .friend'),
+            rightListForStorage = {},
+            leftListForStorage = leftListBeforeStorage.map( (item, i, arr) => {
+
+                return {
+                    id: item.dataset.friendId,
+                    position: item.dataset.position,
+                    display: item.style.display,
+                }
+
+            });
+
+        console.log(leftListBeforeStorage);
+        console.log(rightListBeforeStorage);
+
+         console.log(leftListForStorage);
+
+
 
     }
     })
-});
+}).then( () => {
+    let leftListBeforeStorage = document.querySelectorAll('.left-list-friends .friend');
+    let rightListBeforeStorage = document.body.querySelectorAll('.right-list-friends .friend');
+    let rightListForStorage = {};
+    let leftListForStorage = {};
+
+//    console.log(leftListBeforeStorage);
+//    console.log(rightListBeforeStorage);
+
+
+})
 
 searchLeft.addEventListener('input', () => {
 
@@ -117,6 +147,8 @@ document.addEventListener('mousedown', (e) => {
 
         currentElement.style.position = 'fixed';
         currentElement.style.zIndex = '100';
+        currentElement.style.top = e.clientY - offsetY + 'px';
+        currentElement.style.left = e.clientX - offsetX + 'px';
 
     } else if (currentElement.className == 'friend-photo') {
         
@@ -125,6 +157,8 @@ document.addEventListener('mousedown', (e) => {
 
         currentElement.parentNode.style.position = 'fixed';
         currentElement.parentNode.style.zIndex = '100';
+        currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
+        currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
 
     } else if (currentElement.className == 'friend-name') {
         
@@ -133,6 +167,8 @@ document.addEventListener('mousedown', (e) => {
 
         currentElement.parentNode.style.position = 'fixed';
         currentElement.parentNode.style.zIndex = '100';
+        currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
+        currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
 
     } else if (currentElement.className == 'icon-plus') {
         
@@ -141,6 +177,8 @@ document.addEventListener('mousedown', (e) => {
 
         currentElement.parentNode.style.position = 'fixed';
         currentElement.parentNode.style.zIndex = '100';
+        currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
+        currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
 
     }
     
@@ -183,10 +221,10 @@ document.addEventListener('mouseup', (e) => {
 
 
     
-    console.log(target);
-    console.log(currentClassName);
-    console.log(currentFriendID);
-    console.log(friendsWithCurrentId);
+//    console.log(target);
+//    console.log(currentClassName);
+//    console.log(currentFriendID);
+//    console.log(friendsWithCurrentId);
     
     
     if (e.clientX > halfCurrentClientWidth) {
@@ -238,14 +276,13 @@ document.addEventListener('mousemove', (e) => {
     currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
 
     }
-    
-    
-    if (e.clientY < 255) {
-        currentElement.style.top = 255 - offsetY + 'px';
-    } else if (e.clientY > 577) {
-       currentElement.style.top = 577 - offsetY + 'px'; 
-    }
+
 });
+
+console.log(leftListFriends);
+
+
+
 
 
 
