@@ -98,26 +98,26 @@ document.addEventListener('click', (e) => {
 
         } else if ( currentClassName.indexOf('icon-cancel-friend') != -1 ) {
 
-        friendsWithCurrentId[0].style.display = 'block';
-        friendsWithCurrentId[1].style.display = 'none';
-        friendsWithCurrentId[0].dataset.position = 'left';
-        friendsWithCurrentId[1].dataset.position = 'left';
+            friendsWithCurrentId[0].style.display = 'block';
+            friendsWithCurrentId[1].style.display = 'none';
+            friendsWithCurrentId[0].dataset.position = 'left';
+            friendsWithCurrentId[1].dataset.position = 'left';
+
         }
 });
 
 document.addEventListener('mousedown', (e) => {
     
     currentElement = e.target;
-    
-    console.log(offsetX)
-    console.log(offsetY)
-    
+
     if (currentElement.className == 'friend') {
+
         offsetX = e.offsetX;
         offsetY = e.offsetY;
 
         currentElement.style.position = 'fixed';
         currentElement.style.zIndex = '100';
+
     } else if (currentElement.className == 'friend-photo') {
         
         offsetX = e.offsetX;
@@ -125,6 +125,7 @@ document.addEventListener('mousedown', (e) => {
 
         currentElement.parentNode.style.position = 'fixed';
         currentElement.parentNode.style.zIndex = '100';
+
     } else if (currentElement.className == 'friend-name') {
         
         offsetX = e.offsetX;
@@ -132,6 +133,7 @@ document.addEventListener('mousedown', (e) => {
 
         currentElement.parentNode.style.position = 'fixed';
         currentElement.parentNode.style.zIndex = '100';
+
     } else if (currentElement.className == 'icon-plus') {
         
         offsetX = e.offsetX;
@@ -139,6 +141,7 @@ document.addEventListener('mousedown', (e) => {
 
         currentElement.parentNode.style.position = 'fixed';
         currentElement.parentNode.style.zIndex = '100';
+
     }
     
 });
@@ -149,8 +152,36 @@ document.addEventListener('mouseup', (e) => {
         halfCurrentClientWidth = currentClientWidth / 2,
         target = e.target,
         currentClassName = target.className,
+        currentFriendID,
+        friendsWithCurrentId;
+
+
+
+    if (currentClassName == 'friend') {
+
         currentFriendID = target.dataset.friendId,
         friendsWithCurrentId = document.querySelectorAll(`div[data-friend-id='${currentFriendID}']`);
+
+    } else if (currentClassName == 'friend-photo') {
+
+        currentFriendID = target.parentNode.dataset.friendId,
+        friendsWithCurrentId = document.querySelectorAll(`div[data-friend-id='${currentFriendID}']`);
+
+    } else if (currentClassName == 'friend-name') {
+
+        currentFriendID = target.parentNode.dataset.friendId,
+        friendsWithCurrentId = document.querySelectorAll(`div[data-friend-id='${currentFriendID}']`);
+
+    } else if (currentClassName == 'icon-plus') {
+
+        currentFriendID = target.parentNode.dataset.friendId,
+        friendsWithCurrentId = document.querySelectorAll(`div[data-friend-id='${currentFriendID}']`);
+
+    }
+
+
+
+
     
     console.log(target);
     console.log(currentClassName);
@@ -175,10 +206,7 @@ document.addEventListener('mouseup', (e) => {
         friendsWithCurrentId[1].style.position = 'static';
         currentElement = undefined;
     }
-    
-    
-    
-    console.log(currentElement);
+
 });
 
 document.addEventListener('mousemove', (e) => {
@@ -188,10 +216,28 @@ document.addEventListener('mousemove', (e) => {
 //    console.log(currentClientWidth);
 //    console.log(halfCurrentClientWidth);
     
-    if (currentElement.className != 'friend') return;
+
+    if (currentElement.className == 'friend') {
     
     currentElement.style.top = e.clientY - offsetY + 'px';
     currentElement.style.left = e.clientX - offsetX + 'px';
+
+    } else if (currentElement.className == 'friend-photo') {
+
+    currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
+    currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
+
+    } else if (currentElement.className == 'friend-name') {
+
+    currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
+    currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
+
+    } else if (currentElement.className == 'icon-plus') {
+
+    currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
+    currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
+
+    }
     
     
     if (e.clientY < 255) {
