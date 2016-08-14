@@ -229,7 +229,6 @@ footer button:focus {
 .friend {
     height: 59px;
     width: 290px;
-/*    vertical-align: middle;*/
     border: 1px solid white;
     position: relative;
     background-color: white;
@@ -255,6 +254,7 @@ footer button:focus {
     width: 180px;
     line-height: 59px;
     margin-left: 15px;
+    cursor: default;
 }
 
 .icon-plus-friend,

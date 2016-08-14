@@ -190,6 +190,11 @@ document.addEventListener('mousedown', (e) => {
 
         offsetX = e.offsetX;
         offsetY = e.offsetY;
+        
+        console.log(offsetX);
+        console.log(offsetY);
+        console.log(e)
+        
 
         currentElement.style.position = 'fixed';
         currentElement.style.zIndex = '100';
