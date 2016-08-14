@@ -27,21 +27,49 @@ p.then(() => {
     if(response.error) {
         alert(response.error.error_msg);
     } else {
-        console.log(response)
         let leftListSource = document.getElementById('friendsList').innerHTML,
             leftListTemplateFn = Handlebars.compile(leftListSource),
             leftListTemplate = leftListTemplateFn({leftList: response.response});
 
         leftListFriends.innerHTML = leftListTemplate;
+        
+        if(localStorage.length != 0) {
+            let savedDataForLeftList = JSON.parse(localStorage.leftList);
+            savedDataForLeftList.forEach( (item, i, arr) => {
+                let currentId = item.id,
+                    currentPosition = item.position,
+                    currentDisplay = item.display,
+                    currentFriend = document.querySelector(` .left-list-friends div[data-friend-id='${currentId}']`);
+                
+                currentFriend.dataset.position = currentPosition;
+                currentFriend.style.display = currentDisplay;
+            })
+                
+            
+        }
 
         let rightListSource = document.getElementById('friendsList').innerHTML,
             rightListTemplateFn = Handlebars.compile(rightListSource),
             rightListTemplate = rightListTemplateFn({rightList: response.response});
 
         rightListFriends.innerHTML = rightListTemplate;
+        
+        if(localStorage.length != 0) {
+            let savedDataForRightList = JSON.parse(localStorage.rightList);
+            savedDataForRightList.forEach( (item, i, arr) => {
+                let currentId = item.id,
+                    currentPosition = item.position,
+                    currentDisplay = item.display,
+                    currentFriend = document.querySelector(` .right-list-friends div[data-friend-id='${currentId}']`);
+                
+                currentFriend.dataset.position = currentPosition;
+                currentFriend.style.display = currentDisplay;
+            })
+        } else {
 
-        for (let i = 0; i < rightListFriends.children.length; i++) {
-            rightListFriends.children[i].style.display = 'none';
+            for (let i = 0; i < rightListFriends.children.length; i++) {
+                rightListFriends.children[i].style.display = 'none';
+            }
         };
 
         let leftNodeList = document.querySelectorAll('.left-list-friends .friend'),
@@ -86,12 +114,6 @@ p.then(() => {
         localStorage.rightList = JSON.stringify(rightListForStorage);
             
         })
-        
-    
-        
-        
-        
-        
 
     }
     })
@@ -100,11 +122,6 @@ p.then(() => {
     let rightListBeforeStorage = document.body.querySelectorAll('.right-list-friends .friend');
     let rightListForStorage = {};
     let leftListForStorage = {};
-
-//    console.log(leftListBeforeStorage);
-//    console.log(rightListBeforeStorage);
-
-
 })
 
 searchLeft.addEventListener('input', () => {
@@ -244,17 +261,7 @@ document.addEventListener('mouseup', (e) => {
         currentFriendID = target.parentNode.dataset.friendId,
         friendsWithCurrentId = document.querySelectorAll(`div[data-friend-id='${currentFriendID}']`);
 
-    }
-
-
-
-
-    
-//    console.log(target);
-//    console.log(currentClassName);
-//    console.log(currentFriendID);
-//    console.log(friendsWithCurrentId);
-    
+    }    
     
     if (e.clientX > halfCurrentClientWidth) {
         friendsWithCurrentId[0].style.display = 'none';
@@ -278,12 +285,6 @@ document.addEventListener('mouseup', (e) => {
 
 document.addEventListener('mousemove', (e) => {
     
-    
-//    
-//    console.log(currentClientWidth);
-//    console.log(halfCurrentClientWidth);
-    
-
     if (currentElement.className == 'friend') {
     
     currentElement.style.top = e.clientY - offsetY + 'px';
@@ -308,7 +309,6 @@ document.addEventListener('mousemove', (e) => {
 
 });
 
-console.log(leftListFriends);
 
 
 
