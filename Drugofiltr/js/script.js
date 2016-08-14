@@ -44,10 +44,25 @@ p.then(() => {
             rightListFriends.children[i].style.display = 'none';
         };
 
-        let leftListBeforeStorage = document.querySelectorAll('.left-list-friends .friend'),
-            rightListBeforeStorage = document.body.querySelectorAll('.right-list-friends .friend'),
+        let leftNodeList = document.querySelectorAll('.left-list-friends .friend'),
+            rightNodeList = document.body.querySelectorAll('.right-list-friends .friend'),
             rightListForStorage = {},
-            leftListForStorage = leftListBeforeStorage.map( (item, i, arr) => {
+            leftListForStorage = {},
+            leftListBeforeStorage = [],
+            rightListBeforeStorage = [];
+
+        
+        for (let i = 0; i < leftNodeList.length; i++) {
+            leftListBeforeStorage[i] = leftNodeList[i];
+        };
+        
+        for (let i = 0; i < rightNodeList.length; i++) {
+            rightListBeforeStorage[i] = rightNodeList[i];
+        };
+        
+        document.querySelector('.save').addEventListener('click', () => {
+            
+        leftListForStorage = leftListBeforeStorage.map(function(item, i, arr) {
 
                 return {
                     id: item.dataset.friendId,
@@ -56,13 +71,27 @@ p.then(() => {
                 }
 
             });
+        
+        rightListForStorage = rightListBeforeStorage.map(function(item, i, arr) {
 
-        console.log(leftListBeforeStorage);
-        console.log(rightListBeforeStorage);
+                return {
+                    id: item.dataset.friendId,
+                    position: item.dataset.position,
+                    display: item.style.display,
+                }
 
-         console.log(leftListForStorage);
-
-
+            });
+        
+        localStorage.leftList = JSON.stringify(leftListForStorage);
+        localStorage.rightList = JSON.stringify(rightListForStorage);
+            
+        })
+        
+    
+        
+        
+        
+        
 
     }
     })
