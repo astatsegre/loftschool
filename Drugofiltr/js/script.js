@@ -110,9 +110,11 @@ p.then(() => {
 
             });
         
-        localStorage.leftList = JSON.stringify(leftListForStorage);
-        localStorage.rightList = JSON.stringify(rightListForStorage);
+            localStorage.leftList = JSON.stringify(leftListForStorage);
+            localStorage.rightList = JSON.stringify(rightListForStorage);
             
+            alert('Списки друзей сохранены!');
+  
         })
 
     }
@@ -191,13 +193,6 @@ document.addEventListener('mousedown', (e) => {
 
         offsetX = e.offsetX;
         offsetY = e.offsetY;
-        
-        
-        
-        console.log(offsetX);
-        console.log(offsetY);
-        console.log(e)
-        
 
         currentElement.style.position = 'fixed';
         currentElement.style.zIndex = '100';
