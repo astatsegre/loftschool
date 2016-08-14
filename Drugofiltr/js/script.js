@@ -185,11 +185,14 @@ document.addEventListener('click', (e) => {
 document.addEventListener('mousedown', (e) => {
     
     currentElement = e.target;
+    
 
     if (currentElement.className == 'friend') {
 
         offsetX = e.offsetX;
         offsetY = e.offsetY;
+        
+        
         
         console.log(offsetX);
         console.log(offsetY);
@@ -208,30 +211,23 @@ document.addEventListener('mousedown', (e) => {
 
         currentElement.parentNode.style.position = 'fixed';
         currentElement.parentNode.style.zIndex = '100';
-        currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
+        currentElement.parentNode.style.top = e.clientY - offsetY - 8 + 'px';
         currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
 
     } else if (currentElement.className == 'friend-name') {
         
         offsetX = e.offsetX;
         offsetY = e.offsetY;
-
-        currentElement.parentNode.style.position = 'fixed';
-        currentElement.parentNode.style.zIndex = '100';
-        currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
-        currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
-
-    } else if (currentElement.className == 'icon-plus') {
         
-        offsetX = e.offsetX;
-        offsetY = e.offsetY;
+        e.target = e.target.parentnode;
+        console.log(e.target.parentNode.offsetX);
 
         currentElement.parentNode.style.position = 'fixed';
         currentElement.parentNode.style.zIndex = '100';
         currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
-        currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
+        currentElement.parentNode.style.left = e.clientX - offsetX - 60 + 'px';
 
-    }
+    } 
     
 });
 
@@ -261,12 +257,7 @@ document.addEventListener('mouseup', (e) => {
         currentFriendID = target.parentNode.dataset.friendId,
         friendsWithCurrentId = document.querySelectorAll(`div[data-friend-id='${currentFriendID}']`);
 
-    } else if (currentClassName == 'icon-plus') {
-
-        currentFriendID = target.parentNode.dataset.friendId,
-        friendsWithCurrentId = document.querySelectorAll(`div[data-friend-id='${currentFriendID}']`);
-
-    }    
+    }
     
     if (e.clientX > halfCurrentClientWidth) {
         friendsWithCurrentId[0].style.display = 'none';
@@ -297,18 +288,13 @@ document.addEventListener('mousemove', (e) => {
 
     } else if (currentElement.className == 'friend-photo') {
 
-    currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
+    currentElement.parentNode.style.top = e.clientY - offsetY - 8 + 'px';
     currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
 
     } else if (currentElement.className == 'friend-name') {
 
     currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
-    currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
-
-    } else if (currentElement.className == 'icon-plus') {
-
-    currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
-    currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
+    currentElement.parentNode.style.left = e.clientX - offsetX - 60 + 'px';
 
     }
 
