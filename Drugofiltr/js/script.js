@@ -27,27 +27,70 @@ p.then(() => {
     if(response.error) {
         alert(response.error.error_msg);
     } else {
-        console.log(response)
         let leftListSource = document.getElementById('friendsList').innerHTML,
             leftListTemplateFn = Handlebars.compile(leftListSource),
             leftListTemplate = leftListTemplateFn({leftList: response.response});
 
         leftListFriends.innerHTML = leftListTemplate;
+        
+        if(localStorage.length != 0) {
+            let savedDataForLeftList = JSON.parse(localStorage.leftList);
+            savedDataForLeftList.forEach( (item, i, arr) => {
+                let currentId = item.id,
+                    currentPosition = item.position,
+                    currentDisplay = item.display,
+                    currentFriend = document.querySelector(` .left-list-friends div[data-friend-id='${currentId}']`);
+                
+                currentFriend.dataset.position = currentPosition;
+                currentFriend.style.display = currentDisplay;
+            })
+                
+            
+        }
 
         let rightListSource = document.getElementById('friendsList').innerHTML,
             rightListTemplateFn = Handlebars.compile(rightListSource),
             rightListTemplate = rightListTemplateFn({rightList: response.response});
 
         rightListFriends.innerHTML = rightListTemplate;
+        
+        if(localStorage.length != 0) {
+            let savedDataForRightList = JSON.parse(localStorage.rightList);
+            savedDataForRightList.forEach( (item, i, arr) => {
+                let currentId = item.id,
+                    currentPosition = item.position,
+                    currentDisplay = item.display,
+                    currentFriend = document.querySelector(` .right-list-friends div[data-friend-id='${currentId}']`);
+                
+                currentFriend.dataset.position = currentPosition;
+                currentFriend.style.display = currentDisplay;
+            })
+        } else {
 
-        for (let i = 0; i < rightListFriends.children.length; i++) {
-            rightListFriends.children[i].style.display = 'none';
+            for (let i = 0; i < rightListFriends.children.length; i++) {
+                rightListFriends.children[i].style.display = 'none';
+            }
         };
 
-        let leftListBeforeStorage = document.querySelectorAll('.left-list-friends .friend'),
-            rightListBeforeStorage = document.body.querySelectorAll('.right-list-friends .friend'),
+        let leftNodeList = document.querySelectorAll('.left-list-friends .friend'),
+            rightNodeList = document.body.querySelectorAll('.right-list-friends .friend'),
             rightListForStorage = {},
-            leftListForStorage = leftListBeforeStorage.map( (item, i, arr) => {
+            leftListForStorage = {},
+            leftListBeforeStorage = [],
+            rightListBeforeStorage = [];
+
+        
+        for (let i = 0; i < leftNodeList.length; i++) {
+            leftListBeforeStorage[i] = leftNodeList[i];
+        };
+        
+        for (let i = 0; i < rightNodeList.length; i++) {
+            rightListBeforeStorage[i] = rightNodeList[i];
+        };
+        
+        document.querySelector('.save').addEventListener('click', () => {
+            
+        leftListForStorage = leftListBeforeStorage.map(function(item, i, arr) {
 
                 return {
                     id: item.dataset.friendId,
@@ -56,13 +99,23 @@ p.then(() => {
                 }
 
             });
+        
+        rightListForStorage = rightListBeforeStorage.map(function(item, i, arr) {
 
-        console.log(leftListBeforeStorage);
-        console.log(rightListBeforeStorage);
+                return {
+                    id: item.dataset.friendId,
+                    position: item.dataset.position,
+                    display: item.style.display,
+                }
 
-         console.log(leftListForStorage);
-
-
+            });
+        
+            localStorage.leftList = JSON.stringify(leftListForStorage);
+            localStorage.rightList = JSON.stringify(rightListForStorage);
+            
+            alert('Списки друзей сохранены!');
+  
+        })
 
     }
     })
@@ -71,11 +124,6 @@ p.then(() => {
     let rightListBeforeStorage = document.body.querySelectorAll('.right-list-friends .friend');
     let rightListForStorage = {};
     let leftListForStorage = {};
-
-//    console.log(leftListBeforeStorage);
-//    console.log(rightListBeforeStorage);
-
-
 })
 
 searchLeft.addEventListener('input', () => {
@@ -139,6 +187,7 @@ document.addEventListener('click', (e) => {
 document.addEventListener('mousedown', (e) => {
     
     currentElement = e.target;
+    
 
     if (currentElement.className == 'friend') {
 
@@ -157,30 +206,23 @@ document.addEventListener('mousedown', (e) => {
 
         currentElement.parentNode.style.position = 'fixed';
         currentElement.parentNode.style.zIndex = '100';
-        currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
+        currentElement.parentNode.style.top = e.clientY - offsetY - 8 + 'px';
         currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
 
     } else if (currentElement.className == 'friend-name') {
         
         offsetX = e.offsetX;
         offsetY = e.offsetY;
-
-        currentElement.parentNode.style.position = 'fixed';
-        currentElement.parentNode.style.zIndex = '100';
-        currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
-        currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
-
-    } else if (currentElement.className == 'icon-plus') {
         
-        offsetX = e.offsetX;
-        offsetY = e.offsetY;
+        e.target = e.target.parentnode;
+        console.log(e.target.parentNode.offsetX);
 
         currentElement.parentNode.style.position = 'fixed';
         currentElement.parentNode.style.zIndex = '100';
         currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
-        currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
+        currentElement.parentNode.style.left = e.clientX - offsetX - 60 + 'px';
 
-    }
+    } 
     
 });
 
@@ -210,22 +252,7 @@ document.addEventListener('mouseup', (e) => {
         currentFriendID = target.parentNode.dataset.friendId,
         friendsWithCurrentId = document.querySelectorAll(`div[data-friend-id='${currentFriendID}']`);
 
-    } else if (currentClassName == 'icon-plus') {
-
-        currentFriendID = target.parentNode.dataset.friendId,
-        friendsWithCurrentId = document.querySelectorAll(`div[data-friend-id='${currentFriendID}']`);
-
     }
-
-
-
-
-    
-//    console.log(target);
-//    console.log(currentClassName);
-//    console.log(currentFriendID);
-//    console.log(friendsWithCurrentId);
-    
     
     if (e.clientX > halfCurrentClientWidth) {
         friendsWithCurrentId[0].style.display = 'none';
@@ -249,12 +276,6 @@ document.addEventListener('mouseup', (e) => {
 
 document.addEventListener('mousemove', (e) => {
     
-    
-//    
-//    console.log(currentClientWidth);
-//    console.log(halfCurrentClientWidth);
-    
-
     if (currentElement.className == 'friend') {
     
     currentElement.style.top = e.clientY - offsetY + 'px';
@@ -262,24 +283,18 @@ document.addEventListener('mousemove', (e) => {
 
     } else if (currentElement.className == 'friend-photo') {
 
-    currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
+    currentElement.parentNode.style.top = e.clientY - offsetY - 8 + 'px';
     currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
 
     } else if (currentElement.className == 'friend-name') {
 
     currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
-    currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
-
-    } else if (currentElement.className == 'icon-plus') {
-
-    currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
-    currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
+    currentElement.parentNode.style.left = e.clientX - offsetX - 60 + 'px';
 
     }
 
 });
 
-console.log(leftListFriends);
 
 
 
