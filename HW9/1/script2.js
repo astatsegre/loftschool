@@ -1,27 +1,26 @@
-'use strict'
+"use strict"
 
-let calculator = function(firstNumber) {
-    this.firstNumber = firstNumber;
-};
-
-calculator.prototype.sum = function() {
-            let result = this.firstNumber;
+function calculator (firstNumber) {
+    let objB;
+    return objB = {
+        sum: function() {
+            let result = firstNumber;
             for (let i = 0; i < arguments.length; i++) {
                 result += arguments[i];
             }
             return result;
-        };
+        },
 
-calculator.prototype.dif = function() {
-            let result = this.firstNumber;
+        dif: function() {
+            let result = firstNumber;
             for (let i = 0; i < arguments.length; i++) {
                 result -= arguments[i];
             }
             return result;
-        };
+        },
 
-calculator.prototype.div = function() {
-            let result = this.firstNumber;
+        div: function() {
+            let result = firstNumber;
             try{
                 for (let i = 0; i < arguments.length; i++) {
 
@@ -35,17 +34,19 @@ calculator.prototype.div = function() {
             catch(e) {
                         console.log(e.message)
                     }
-        };
+        },
 
-calculator.prototype.mul = function() {
-            let result = this.firstNumber;
+        mul: function() {
+            let result = firstNumber;
             for (let i = 0; i < arguments.length; i++) {
                 result *= arguments[i];
             }
             return result;
-        };
+        },
+    }
+}
 
-let myCalculator = new calculator(100);
+let myCalculator = calculator(100);
 
 console.log( myCalculator.sum(1, 2, 3, 10) );
 console.log( myCalculator.dif(10, 20) );
