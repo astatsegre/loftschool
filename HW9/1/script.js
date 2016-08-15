@@ -1,18 +1,19 @@
 'use strict'
 
-let calculator = function(firstNumber) {
+let calculatorES5 = function(firstNumber) {
     this.firstNumber = firstNumber;
 };
 
-calculator.prototype.sum = function() {
+calculatorES5.prototype.sum = function() {
+            let currentArguments = arguments;
             let result = this.firstNumber;
-            for (let i = 0; i < arguments.length; i++) {
+            for (let i = 0; i < currentArguments.length; i++) {
                 result += arguments[i];
             }
             return result;
         };
 
-calculator.prototype.dif = function() {
+calculatorES5.prototype.dif = function() {
             let result = this.firstNumber;
             for (let i = 0; i < arguments.length; i++) {
                 result -= arguments[i];
@@ -20,7 +21,7 @@ calculator.prototype.dif = function() {
             return result;
         };
 
-calculator.prototype.div = function() {
+calculatorES5.prototype.div = function() {
             let result = this.firstNumber;
             try{
                 for (let i = 0; i < arguments.length; i++) {
@@ -37,7 +38,7 @@ calculator.prototype.div = function() {
                     }
         };
 
-calculator.prototype.mul = function() {
+calculatorES5.prototype.mul = function() {
             let result = this.firstNumber;
             for (let i = 0; i < arguments.length; i++) {
                 result *= arguments[i];
@@ -45,10 +46,34 @@ calculator.prototype.mul = function() {
             return result;
         };
 
-let myCalculator = new calculator(100);
+let myCalculator = new calculatorES5(100);
 
 console.log( myCalculator.sum(1, 2, 3, 10) );
 console.log( myCalculator.dif(10, 20) );
 console.log( myCalculator.div(2, 2) );
 console.log( myCalculator.mul(2, 2) );
 console.log( myCalculator.div(2, 0) );
+
+
+let inherit = function(child, parent) {
+    child.prototype = Object.create(parent.prototype);
+};
+
+let SqrCalc = function(firstNumber) {
+    this.firstNumber = firstNumber;
+
+};
+
+inherit(SqrCalc, calculatorES5);
+
+SqrCalc.prototype.sum = function() {
+    let result = calculatorES5.prototype.sum.apply(this, arguments);
+    let sqrResult = result * result;
+    console.log(result);
+
+    return sqrResult;
+};
+
+let mySqrCalculator = new SqrCalc(100);
+
+console.log( mySqrCalculator.sum([1, 2, 3, 10]) );
