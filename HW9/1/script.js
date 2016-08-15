@@ -1,13 +1,16 @@
 'use strict'
 
+//
+// Изначальный класс калькулятора
+//
+
 let calculatorES5 = function(firstNumber) {
     this.firstNumber = firstNumber;
 };
 
 calculatorES5.prototype.sum = function() {
-            let currentArguments = arguments;
             let result = this.firstNumber;
-            for (let i = 0; i < currentArguments.length; i++) {
+            for (let i = 0; i < arguments.length; i++) {
                 result += arguments[i];
             }
             return result;
@@ -54,6 +57,10 @@ console.log( myCalculator.div(2, 2) );
 console.log( myCalculator.mul(2, 2) );
 console.log( myCalculator.div(2, 0) );
 
+//
+// Создаю новый класс калькулятора, возводящего результаты в квадрат
+//
+
 
 let inherit = function(child, parent) {
     child.prototype = Object.create(parent.prototype);
@@ -61,19 +68,42 @@ let inherit = function(child, parent) {
 
 let SqrCalc = function(firstNumber) {
     this.firstNumber = firstNumber;
-
 };
 
 inherit(SqrCalc, calculatorES5);
 
-SqrCalc.prototype.sum = function() {
-    let result = calculatorES5.prototype.sum.apply(this, arguments);
-    let sqrResult = result * result;
-    console.log(result);
+SqrCalc.prototype.sum = function(arr) {
+    let parentResult = calculatorES5.prototype.sum.apply(this, arr),
+        currentResult = parentResult * parentResult;
 
-    return sqrResult;
+    return currentResult
+};
+
+SqrCalc.prototype.dif = function(arr) {
+    let parentResult = calculatorES5.prototype.dif.apply(this, arr),
+        currentResult = parentResult * parentResult;
+
+    return currentResult
+};
+
+SqrCalc.prototype.div = function(arr) {
+    let parentResult = calculatorES5.prototype.div.apply(this, arr),
+        currentResult = parentResult * parentResult;
+
+    return currentResult
+};
+
+SqrCalc.prototype.mul = function(arr) {
+    let parentResult = calculatorES5.prototype.mul.apply(this, arr),
+        currentResult = parentResult * parentResult;
+
+    return currentResult
 };
 
 let mySqrCalculator = new SqrCalc(100);
+let newArr = [2, 2];
 
-console.log( mySqrCalculator.sum([1, 2, 3, 10]) );
+console.log( mySqrCalculator.sum(newArr) );
+console.log( mySqrCalculator.dif(newArr) );
+console.log( mySqrCalculator.div(newArr) );
+console.log( mySqrCalculator.mul(newArr) );
