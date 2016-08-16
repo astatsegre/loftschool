@@ -1,8 +1,10 @@
 'use strict'
 
+
 /////////////////////////////////////////
 // Изначальный класс калькулятора в ES5//
 /////////////////////////////////////////
+
 
 let calculatorES5 = function(firstNumber) {
     this.firstNumber = firstNumber;
@@ -57,6 +59,7 @@ console.log( myCalculator.div(2, 2) );
 console.log( myCalculator.mul(2, 2) );
 console.log( myCalculator.div(2, 0) );
 
+
 /////////////////////////////////////////////////////////////////////
 // Новый класс калькулятора, возводящего результаты в квадрат в ES5//
 /////////////////////////////////////////////////////////////////////
@@ -108,9 +111,11 @@ console.log( mySqrCalculator.dif(newArr) );
 console.log( mySqrCalculator.div(newArr) );
 console.log( mySqrCalculator.mul(newArr) );
 
+
 /////////////////////////////////////////
 // Изначальный класс калькулятора в ES6//
 /////////////////////////////////////////
+
 
 class CalculatorES6 {
     constructor(firstNumber) {
@@ -168,9 +173,11 @@ console.log( myCalculator.div(2, 2) );
 console.log( myCalculator.mul(2, 2) );
 console.log( myCalculator.div(2, 0) );
 
+
 /////////////////////////////////////////////////////////////////////
 // Новый класс калькулятора, возводящего результаты в квадрат в ES6//
 /////////////////////////////////////////////////////////////////////
+
 
 class SqrCalcES6 extends CalculatorES6 {
     constructor(initial) {
@@ -178,7 +185,7 @@ class SqrCalcES6 extends CalculatorES6 {
     }
 
     sum(arr) {
-        let parentResult = super.sum(arr),
+        let parentResult = super.sum.apply(this, arr),
             currentResult = parentResult * parentResult;
 
         return currentResult
@@ -186,64 +193,26 @@ class SqrCalcES6 extends CalculatorES6 {
     }
 
     dif(arr) {
-       let parentResult = super.dif(arr),
-            currentResult = parentResult * parentResult;
+       let parentResult = super.dif.apply(this, arr),
+           currentResult = parentResult * parentResult;
 
         return currentResult
     }
 
     div(arr) {
-        let parentResult = super.div(arr),
+        let parentResult = super.div.apply(this, arr),
             currentResult = parentResult * parentResult;
 
         return currentResult
     }
 
     mul(arr) {
-        let parentResult = super.mul(arr),
+        let parentResult = super.mul.apply(this, arr),
             currentResult = parentResult * parentResult;
 
         return currentResult
     }
 }
-
-//let inherit = function(child, parent) {
-//    child.prototype = Object.create(parent.prototype);
-//};
-//
-//let SqrCalc = function(firstNumber) {
-//    this.firstNumber = firstNumber;
-//};
-//
-//inherit(SqrCalc, calculatorES5);
-//
-//SqrCalc.prototype.sum = function(arr) {
-//    let parentResult = calculatorES5.prototype.sum.apply(this, arr),
-//        currentResult = parentResult * parentResult;
-//
-//    return currentResult
-//};
-//
-//SqrCalc.prototype.dif = function(arr) {
-//    let parentResult = calculatorES5.prototype.dif.apply(this, arr),
-//        currentResult = parentResult * parentResult;
-//
-//    return currentResult
-//};
-//
-//SqrCalc.prototype.div = function(arr) {
-//    let parentResult = calculatorES5.prototype.div.apply(this, arr),
-//        currentResult = parentResult * parentResult;
-//
-//    return currentResult
-//};
-//
-//SqrCalc.prototype.mul = function(arr) {
-//    let parentResult = calculatorES5.prototype.mul.apply(this, arr),
-//        currentResult = parentResult * parentResult;
-//
-//    return currentResult
-//};
 
 let mySqrCalculatorES6 = new SqrCalcES6(100);
 let newArrES6 = [2, 2];
