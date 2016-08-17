@@ -7,7 +7,7 @@ accordeon.addEventListener('click', (e) => {
     
     let target = e.target;
     
-    if(target.tagName != 'A') return;
+    if(target.tagName == 'A') {
     
     let aTag = document.querySelectorAll(".accordeon a");
     let contentList = document.querySelectorAll(".content > ul");
@@ -26,9 +26,20 @@ accordeon.addEventListener('click', (e) => {
     };
  
  
-    e.target.classList.toggle("active");
-    e.target.nextElementSibling.firstElementChild.classList.toggle("unhide");
-    e.target.firstElementChild.classList.toggle("rectangle-active");
+    target.classList.toggle("active");
+    target.nextElementSibling.firstElementChild.classList.toggle("unhide");
+    target.firstElementChild.classList.toggle("rectangle-active");
+
+    }
+
+    if (target.classList.contains('rectangle') == true) {
+
+        target.parentNode.classList.toggle("active");
+        target.parentNode.nextElementSibling.firstElementChild.classList.toggle("unhide");
+        target.classList.toggle("rectangle-active");
+
+
+    }
     
 })
 
