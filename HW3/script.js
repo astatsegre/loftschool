@@ -58,12 +58,16 @@ let slice = function(arr, begin, end) {
     let newArr = [];
     
     if (end === undefined) {
-        end = arr.length + 1;
+        end = arr.length;
+    };
+
+    if (end > arr.length) {
+        end = arr.length;
     };
     
     if (begin === undefined) {
         begin = 0;
-    }
+    };
     
     if (begin < 0) {
         begin = arr.length + begin;
@@ -81,8 +85,8 @@ let slice = function(arr, begin, end) {
     return newArr;
 }
 
-//let checkSlice = slice(firstArray);
-//console.log(checkSlice);
+/*let checkSlice = slice(firstArray);
+console.log(checkSlice);*/
 
 
 let reduce = function (arr, reduceFunc, initialValue, result, i) {
