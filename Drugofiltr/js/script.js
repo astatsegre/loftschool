@@ -82,11 +82,11 @@ p.then(() => {
         
         for (let i = 0; i < leftNodeList.length; i++) {
             leftListBeforeStorage[i] = leftNodeList[i];
-        };
+        }
         
         for (let i = 0; i < rightNodeList.length; i++) {
             rightListBeforeStorage[i] = rightNodeList[i];
-        };
+        }
         
         document.querySelector('.save').addEventListener('click', () => {
             
@@ -132,7 +132,7 @@ searchLeft.addEventListener('input', () => {
 
     for (let i = 0; i < leftListFriends.children.length; i++) {
 
-        if ( leftListFriends.children[i].dataset.position == 'right') continue;
+        if ( leftListFriends.children[i].dataset.position === 'right') continue;
 
         if ( leftListFriends.children[i].children[1].innerHTML.toLowerCase().indexOf(searchLeftValue) != -1 ) {
             leftListFriends.children[i].style.display = 'block';
@@ -148,7 +148,7 @@ searchRight.addEventListener('input', () => {
 
     for (let i = 0; i < rightListFriends.children.length; i++) {
 
-        if ( rightListFriends.children[i].dataset.position == 'left') continue;
+        if ( rightListFriends.children[i].dataset.position === 'left') continue;
 
         if ( rightListFriends.children[i].children[1].innerHTML.toLowerCase().indexOf(searchRightValue) != -1 ) {
             rightListFriends.children[i].style.display = 'block';
@@ -165,7 +165,7 @@ document.addEventListener('click', (e) => {
         currentFriendID = target.parentNode.dataset.friendId,
         friendsWithCurrentId = document.querySelectorAll(`div[data-friend-id='${currentFriendID}']`);
 
-    if (currentClassName.indexOf('icon-plus-friend') == -1 && currentClassName.indexOf('icon-cancel-friend') == -1 ) return;
+    if (currentClassName.indexOf('icon-plus-friend') === -1 && currentClassName.indexOf('icon-cancel-friend') === -1 ) return;
 
     if ( currentClassName.indexOf('icon-plus-friend') != -1 ) {
 
@@ -189,7 +189,7 @@ document.addEventListener('mousedown', (e) => {
     currentElement = e.target;
     
 
-    if (currentElement.className == 'friend') {
+    if (currentElement.className === 'friend') {
 
         offsetX = e.offsetX;
         offsetY = e.offsetY;
@@ -199,7 +199,7 @@ document.addEventListener('mousedown', (e) => {
         currentElement.style.top = e.clientY - offsetY + 'px';
         currentElement.style.left = e.clientX - offsetX + 'px';
 
-    } else if (currentElement.className == 'friend-photo') {
+    } else if (currentElement.className === 'friend-photo') {
         
         offsetX = e.offsetX;
         offsetY = e.offsetY;
@@ -209,7 +209,7 @@ document.addEventListener('mousedown', (e) => {
         currentElement.parentNode.style.top = e.clientY - offsetY - 8 + 'px';
         currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
 
-    } else if (currentElement.className == 'friend-name') {
+    } else if (currentElement.className === 'friend-name') {
         
         offsetX = e.offsetX;
         offsetY = e.offsetY;
@@ -237,17 +237,17 @@ document.addEventListener('mouseup', (e) => {
 
 
 
-    if (currentClassName == 'friend') {
+    if (currentClassName === 'friend') {
 
         currentFriendID = target.dataset.friendId,
         friendsWithCurrentId = document.querySelectorAll(`div[data-friend-id='${currentFriendID}']`);
 
-    } else if (currentClassName == 'friend-photo') {
+    } else if (currentClassName === 'friend-photo') {
 
         currentFriendID = target.parentNode.dataset.friendId,
         friendsWithCurrentId = document.querySelectorAll(`div[data-friend-id='${currentFriendID}']`);
 
-    } else if (currentClassName == 'friend-name') {
+    } else if (currentClassName === 'friend-name') {
 
         currentFriendID = target.parentNode.dataset.friendId,
         friendsWithCurrentId = document.querySelectorAll(`div[data-friend-id='${currentFriendID}']`);
@@ -276,17 +276,17 @@ document.addEventListener('mouseup', (e) => {
 
 document.addEventListener('mousemove', (e) => {
     
-    if (currentElement.className == 'friend') {
+    if (currentElement.className === 'friend') {
     
     currentElement.style.top = e.clientY - offsetY + 'px';
     currentElement.style.left = e.clientX - offsetX + 'px';
 
-    } else if (currentElement.className == 'friend-photo') {
+    } else if (currentElement.className === 'friend-photo') {
 
     currentElement.parentNode.style.top = e.clientY - offsetY - 8 + 'px';
     currentElement.parentNode.style.left = e.clientX - offsetX + 'px';
 
-    } else if (currentElement.className == 'friend-name') {
+    } else if (currentElement.className === 'friend-name') {
 
     currentElement.parentNode.style.top = e.clientY - offsetY + 'px';
     currentElement.parentNode.style.left = e.clientX - offsetX - 60 + 'px';
@@ -294,12 +294,3 @@ document.addEventListener('mousemove', (e) => {
     }
 
 });
-
-
-
-
-
-
-
-
-
