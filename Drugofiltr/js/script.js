@@ -1,4 +1,4 @@
-'use strict'
+    'use strict'
 
 let leftListFriends = document.querySelector('.left-list-friends'),
     rightListFriends = document.querySelector('.right-list-friends'),
@@ -190,6 +190,8 @@ document.addEventListener('mousedown', (e) => {
     
     currentElement = e.target;
     
+    if (currentElement === undefined) return
+
 
     if (currentElement.className === 'friend') {
 
@@ -216,8 +218,8 @@ document.addEventListener('mousedown', (e) => {
         offsetX = e.offsetX;
         offsetY = e.offsetY;
         
-        e.target = e.target.parentnode;
-        console.log(e.target.parentNode.offsetX);
+        if (currentElement === undefined) return
+
 
         currentElement.parentNode.style.position = 'fixed';
         currentElement.parentNode.style.zIndex = '100';
@@ -254,9 +256,14 @@ document.addEventListener('mouseup', (e) => {
         currentFriendID = target.parentNode.dataset.friendId,
         friendsWithCurrentId = document.querySelectorAll(`div[data-friend-id='${currentFriendID}']`);
 
+
+
     }
     
     if (e.clientX > halfCurrentClientWidth) {
+
+        if (friendsWithCurrentId === undefined) return
+
         friendsWithCurrentId[0].style.display = 'none';
         friendsWithCurrentId[1].style.display = 'block';
         friendsWithCurrentId[0].dataset.position = 'right';
@@ -265,6 +272,9 @@ document.addEventListener('mouseup', (e) => {
         friendsWithCurrentId[1].style.position = 'static';
         currentElement = undefined;
     } else if (e.clientX < halfCurrentClientWidth) {
+
+        if (friendsWithCurrentId === undefined) return
+
         friendsWithCurrentId[0].style.display = 'block';
         friendsWithCurrentId[1].style.display = 'none';
         friendsWithCurrentId[0].dataset.position = 'left';
@@ -278,6 +288,8 @@ document.addEventListener('mouseup', (e) => {
 
 document.addEventListener('mousemove', (e) => {
     
+    if (currentElement === undefined) return
+
     if (currentElement.className === 'friend') {
     
     currentElement.style.top = e.clientY - offsetY + 'px';
