@@ -1,3 +1,5 @@
+'use strict'
+
 let leftListFriends = document.querySelector('.left-list-friends'),
     rightListFriends = document.querySelector('.right-list-friends'),
     searchLeft = document.querySelector('.search-left'),
