@@ -6,11 +6,11 @@
 /////////////////////////////////////////
 
 
-let calculatorES5 = function(firstNumber) {
+let CalculatorES5 = function(firstNumber) {
     this.firstNumber = firstNumber;
 };
 
-calculatorES5.prototype.sum = function() {
+CalculatorES5.prototype.sum = function() {
             let result = this.firstNumber;
             for (let i = 0; i < arguments.length; i++) {
                 result += arguments[i];
@@ -18,7 +18,7 @@ calculatorES5.prototype.sum = function() {
             return result;
         };
 
-calculatorES5.prototype.dif = function() {
+CalculatorES5.prototype.dif = function() {
             let result = this.firstNumber;
             for (let i = 0; i < arguments.length; i++) {
                 result -= arguments[i];
@@ -26,7 +26,7 @@ calculatorES5.prototype.dif = function() {
             return result;
         };
 
-calculatorES5.prototype.div = function() {
+CalculatorES5.prototype.div = function() {
             let result = this.firstNumber;
             try{
                 for (let i = 0; i < arguments.length; i++) {
@@ -43,7 +43,7 @@ calculatorES5.prototype.div = function() {
                     }
         };
 
-calculatorES5.prototype.mul = function() {
+CalculatorES5.prototype.mul = function() {
             let result = this.firstNumber;
             for (let i = 0; i < arguments.length; i++) {
                 result *= arguments[i];
@@ -51,7 +51,7 @@ calculatorES5.prototype.mul = function() {
             return result;
         };
 
-let myCalculator = new calculatorES5(100);
+let myCalculator = new CalculatorES5(100);
 
 console.log( myCalculator.sum(1, 2, 3, 10) );
 console.log( myCalculator.dif(10, 20) );
@@ -73,43 +73,39 @@ let SqrCalc = function(firstNumber) {
     this.firstNumber = firstNumber;
 };
 
-inherit(SqrCalc, calculatorES5);
+inherit(SqrCalc, CalculatorES5);
 
-SqrCalc.prototype.sum = function(arr) {
-    let parentResult = calculatorES5.prototype.sum.apply(this, arr),
-        currentResult = parentResult * parentResult;
+SqrCalc.prototype.sum = function() {
+    let parentResult = CalculatorES5.prototype.sum.apply(this, arguments);
 
-    return currentResult
+    return Math.pow(parentResult, 2);
 };
 
-SqrCalc.prototype.dif = function(arr) {
-    let parentResult = calculatorES5.prototype.dif.apply(this, arr),
-        currentResult = parentResult * parentResult;
+SqrCalc.prototype.dif = function() {
+    let parentResult = CalculatorES5.prototype.dif.apply(this, arguments);
 
-    return currentResult
+    return Math.pow(parentResult, 2)
 };
 
-SqrCalc.prototype.div = function(arr) {
-    let parentResult = calculatorES5.prototype.div.apply(this, arr),
-        currentResult = parentResult * parentResult;
+SqrCalc.prototype.div = function() {
+    let parentResult = CalculatorES5.prototype.div.apply(this, arguments);
 
-    return currentResult
+    return Math.pow(parentResult, 2)
 };
 
-SqrCalc.prototype.mul = function(arr) {
-    let parentResult = calculatorES5.prototype.mul.apply(this, arr),
-        currentResult = parentResult * parentResult;
+SqrCalc.prototype.mul = function() {
+    let parentResult = CalculatorES5.prototype.mul.apply(this, arguments);
 
-    return currentResult
+    return Math.pow(parentResult, 2)
 };
 
 let mySqrCalculator = new SqrCalc(100);
 let newArr = [2, 2];
 
-console.log( mySqrCalculator.sum(newArr) );
-console.log( mySqrCalculator.dif(newArr) );
-console.log( mySqrCalculator.div(newArr) );
-console.log( mySqrCalculator.mul(newArr) );
+console.log( mySqrCalculator.sum(2, 2) );
+console.log( mySqrCalculator.dif(2, 2) );
+console.log( mySqrCalculator.div(2, 2) );
+console.log( mySqrCalculator.mul(2, 2) );
 
 
 /////////////////////////////////////////
@@ -140,19 +136,15 @@ class CalculatorES6 {
 
     div() {
         let result = this.firstNumber;
-            try{
-                for (let i = 0; i < arguments.length; i++) {
 
-                        if (arguments[i] == 0) {
-                            throw new Error ('Пытаются поделить на ноль')
-                        }
-                        result /= arguments[i];
-                }
-                return result;
+            for (let i = 0; i < arguments.length; i++) {
+
+                    if (arguments[i] == 0) {
+                        throw new Error ('Пытаются поделить на ноль')
+                    }
+                    result /= arguments[i];
             }
-            catch(e) {
-                        console.log(e.message)
-            }
+            return result;
     }
 
     mul() {
