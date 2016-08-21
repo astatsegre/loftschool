@@ -23,6 +23,7 @@
         <button type="button" class="btn btn-default" onclick="Router.handle('friends')">Друзья</button>
         <button type="button" class="btn btn-default" onclick="Router.handle('news')">Новости</button>
         <button type="button" class="btn btn-default" onclick="Router.handle('groups')">Группы</button>
+        <button type="button" class="btn btn-default" onclick="Router.handle('photos')">Фото</button>
     </div>
     <hr>
     <div id="results"></div>
@@ -86,5 +87,17 @@
     </div>
     {{/each}}
 </script>
+
+<script type="text/x-handlebars-template" id="photosTemplate">
+    {{#each list}}
+        <div class="friend-photo">
+            <img src="{{photo_75}}" width="50" height="50">
+            <span>Лайков: {{likes.count}}</span>
+            <span>Репостов: {{reposts.count}}</span>
+            <span>Комментариев: {{comments.count}}</span>
+        </div>
+    {{/each}}
+</script>
+
 </body>
 </html>

@@ -17,7 +17,22 @@ var Controller = {
     groupsRoute: function() {
         return Model.getGroups().then(function(groups) {
             console.log(groups);
-            results.innerHTML = View.render('groups', {list: groups.items}, 'v:5.53');
+            results.innerHTML = View.render('groups', {list: groups.items});
+        })
+    },
+    photosRoute: function() {
+        return Model.getPhotos().then(function(photos) {
+
+            let neededCountOfQueries = Math.ceil(photos.count/200),
+
+
+            for (let i = 1; i < neededCountOfQueries; i++) {
+
+            }
+
+            console.log(photos);
+            console.log(photos.items.length)
+            results.innerHTML = View.render('photos', {list: photos.items});
         })
     }
 
