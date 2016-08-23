@@ -27,14 +27,36 @@ var Controller = {
                 currentOffset = 0,
                 currentPhotos = photos;
 
-            for (let i = 1; i < neededCountOfQueries; i++) {
-                currentOffset += 200;
+
+            let addPhotos = function(currentPhotos, init){
+                if (init === undefined) {
+                    init = 1;
+                };
+
+                if (init < neededCountOfQueries) {
+                    Model.getPhotos().then(function(photos) {
+
+                        console.log(photos);
+
+                        for (let i = 0; i < photos.items.length - 1; i++) {
+                            let amountOfCurrentPhotos = currentPhotos.items.length;
+                            currentPhotos.items[amountOfCurrentPhotos] = photos.items[i];
+
+                        }
+                        console.log(currentPhotos);
+
+                        return currentPhotos
+                    }).then(function(currentPhotos) {
+                    init++
+                    console.log(currentPhotos);
+                    return addPhotos(currentPhotos, init)
+                    })
+
+                } else {
+                    results.innerHTML = View.render('photos', {list: currentPhotos.items});
+                }
             }
 
-            console.log(currentPhotos);
-            console.log(photos);
-            console.log(neededCountOfQueries)
-            results.innerHTML = View.render('photos', {list: currentPhotos.items});
         })
     }
 

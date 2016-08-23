@@ -43,7 +43,6 @@ var Model = {
     },
     getPhotos: function() {
         this.offsetNumber += 200;
-        console.log(this.offsetNumber)
         return this.callApi('photos.getAll', {extended: 1, count: 200, offset: this.offsetNumber, v: '5.53'} )
     }
 };
