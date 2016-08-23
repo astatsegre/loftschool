@@ -29,15 +29,6 @@ var Controller = {
 
             for (let i = 1; i < neededCountOfQueries; i++) {
                 currentOffset += 200;
-                Model.getPhotos(200).then(function(anotherPhotos) {
-                    for (let b = currentOffset; b < currentOffset + anotherPhotos.items.length; b++) {
-                        let n = 0;
-                        currentPhotos.items[currentOffset - 1] = anotherPhotos.items[n];
-                        n++
-                        console.log('сработало')
-                    }
-                })
-
             }
 
             console.log(currentPhotos);
