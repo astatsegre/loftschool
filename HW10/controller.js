@@ -21,6 +21,7 @@ var Controller = {
         })
     },
     photosRoute: function() {
+        console.log('сработало!');
         return Model.getPhotos().then(function(photos) {
 
             let neededCountOfQueries = Math.ceil(photos.count/200),
@@ -36,14 +37,10 @@ var Controller = {
                 if (init < neededCountOfQueries) {
                     Model.getPhotos().then(function(photos) {
 
-                        console.log(photos);
-
-                        for (let i = 0; i < photos.items.length - 1; i++) {
+                        for (let i = 0; i < photos.items.length; i++) {
                             let amountOfCurrentPhotos = currentPhotos.items.length;
                             currentPhotos.items[amountOfCurrentPhotos] = photos.items[i];
-
                         }
-                        console.log(currentPhotos);
 
                         return currentPhotos
                     }).then(function(currentPhotos) {
@@ -53,10 +50,12 @@ var Controller = {
                     })
 
                 } else {
+                    let callComments - new Promise
+                    //////////////////Здесь закончил!!!!/////////////
                     results.innerHTML = View.render('photos', {list: currentPhotos.items});
                 }
             }
-
+                addPhotos(currentPhotos);
         })
     }
 
