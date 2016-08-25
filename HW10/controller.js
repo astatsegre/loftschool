@@ -51,7 +51,6 @@ var Controller = {
 
                 } else {
 
-//                    let callComments = new Promise(function(resolve, reject) {
                         let photosIds = [];
                         currentPhotos.items.forEach(function(item, i, arr) {
                             photosIds[i] = item.owner_id + '_' + item.id;
@@ -65,16 +64,12 @@ var Controller = {
                         }).then(function() {
                             results.innerHTML = View.render('photos', {list: currentPhotos.items});
                         });
-//                    });
-
-
                 }
             }
                 addPhotos(currentPhotos);
         });
-
-                                      }
-                                      }
+    }
+}
 
 
 
