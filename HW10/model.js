@@ -45,5 +45,8 @@ var Model = {
         console.log('работает');
         this.offsetNumber += 200;
         return this.callApi('photos.getAll', {extended: 1, count: 200, offset: this.offsetNumber, v: '5.53'} )
+    },
+    getPhotosIds: function(ids) {
+        return this.callApi('photos.getById', {photos: ids, extended: 1, v: '5.53'})
     }
 };

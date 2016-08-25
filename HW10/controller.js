@@ -50,13 +50,35 @@ var Controller = {
                     })
 
                 } else {
-                    let callComments - new Promise
-                    //////////////////Здесь закончил!!!!/////////////
-                    results.innerHTML = View.render('photos', {list: currentPhotos.items});
+
+                    let callComments = new Promise(function(resolve, reject) {
+                        let photosIds = [];
+                        currentPhotos.items.forEach(function(item, i, arr) {
+                            photosIds[i] = item.owner_id + '_' + item.id;
+                        });
+                        let photosIdsStr = photosIds.join(',');
+
+                        Model.getPhotosIds(photosIdsStr).then(function(idsOfPhotos) {
+                            currentPhotos.items.forEach(function(item, i, arr) {
+                               item.commentsCount = idsOfPhotos[i].comments.count
+                            });
+                        }).then(function() {
+                            results.innerHTML = View.render('photos', {list: currentPhotos.items});
+                        });
+                    });
+
+
                 }
             }
                 addPhotos(currentPhotos);
-        })
-    }
+        });
 
-};
+                                      }
+                                      }
+
+
+
+
+
+
+
