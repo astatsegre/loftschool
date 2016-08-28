@@ -1,16 +1,22 @@
 let fs = require('fs');
 
-let scanFiles = function(dirForSearch) {
+let scanFiles = function(dirForSearch, level) {
 
     let dirs = fs.readdirSync(dirForSearch);
-
-    console.log(dirs);
+    let currentLevel = '-';
+    currentLevel += level || '';
 
     for (let dir of dirs) {
-        let stat = fs.statSync(dir);
+        let dirWithFullPath = dirForSearch +'/' + dir;
+        let stat = fs.statSync(dirWithFullPath);
 
-        console.log(stat);
+        if (stat.isFile() === true) {
+            console.log(`${currentLevel}${dir} ${stat.size} bytes`);
+        } else {
+            console.log(`${currentLevel}${dir} (FOLDER)`)
+            scanFiles(dirWithFullPath, currentLevel)
+        }
     }
 };
 
-scanFiles('C:/GitHub/HW10');
+scanFiles('C:/GitHub');
