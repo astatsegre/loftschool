@@ -1,13 +1,16 @@
-'use strict'
-
 let fs = require('fs');
 
-let dirs = fs.readdirSync('../../');
+let scanFiles = function(dirForSearch) {
 
-console.log(dirs)
+    let dirs = fs.readdirSync(dirForSearch);
 
-for(let dir of dirs) {
-//    let stat = fs.statSync(dir);
+    console.log(dirs);
 
-//    console.log(dir, stat.size);
-}
+    for (let dir of dirs) {
+        let stat = fs.statSync(dir);
+
+        console.log(stat);
+    }
+};
+
+scanFiles('C:/GitHub/HW10');
