@@ -28,7 +28,7 @@ CalculatorES5.prototype.dif = function() {
 
 CalculatorES5.prototype.div = function() {
             let result = this.firstNumber;
-            try{
+
                 for (let i = 0; i < arguments.length; i++) {
 
                         if (arguments[i] == 0) {
@@ -37,10 +37,7 @@ CalculatorES5.prototype.div = function() {
                         result /= arguments[i];
                 }
                 return result;
-            }
-            catch(e) {
                         console.log(e.message)
-                    }
         };
 
 CalculatorES5.prototype.mul = function() {
@@ -57,7 +54,7 @@ console.log( myCalculator.sum(1, 2, 3, 10) );
 console.log( myCalculator.dif(10, 20) );
 console.log( myCalculator.div(2, 2) );
 console.log( myCalculator.mul(2, 2) );
-console.log( myCalculator.div(2, 0) );
+console.log( myCalculator.div(2, 2) );
 
 
 /////////////////////////////////////////////////////////////////////
@@ -163,7 +160,7 @@ console.log( myCalculator.sum(1, 2, 3, 10) );
 console.log( myCalculator.dif(10, 20) );
 console.log( myCalculator.div(2, 2) );
 console.log( myCalculator.mul(2, 2) );
-console.log( myCalculator.div(2, 0) );
+console.log( myCalculator.div(2, 2) );
 
 
 /////////////////////////////////////////////////////////////////////
@@ -176,40 +173,39 @@ class SqrCalcES6 extends CalculatorES6 {
         super(initial);
     }
 
-    sum(arr) {
-        let parentResult = super.sum.apply(this, arr),
-            currentResult = parentResult * parentResult;
+    sum() {
+        let parentResult = super.sum.apply(this, arguments),
+            currentResult = Math.pow(parentResult, 2);
 
         return currentResult
 
     }
 
-    dif(arr) {
-       let parentResult = super.dif.apply(this, arr),
-           currentResult = parentResult * parentResult;
+    dif() {
+       let parentResult = super.dif.apply(this, arguments),
+           currentResult = Math.pow(parentResult, 2);
 
         return currentResult
     }
 
-    div(arr) {
-        let parentResult = super.div.apply(this, arr),
-            currentResult = parentResult * parentResult;
+    div() {
+        let parentResult = super.div.apply(this, arguments),
+            currentResult = Math.pow(parentResult, 2);
 
         return currentResult
     }
 
-    mul(arr) {
-        let parentResult = super.mul.apply(this, arr),
-            currentResult = parentResult * parentResult;
+    mul() {
+        let parentResult = super.mul.apply(this, arguments),
+            currentResult = Math.pow(parentResult, 2);
 
         return currentResult
     }
 }
 
 let mySqrCalculatorES6 = new SqrCalcES6(100);
-let newArrES6 = [2, 2];
 
-console.log( mySqrCalculatorES6.sum(newArrES6) );
-console.log( mySqrCalculatorES6.dif(newArrES6) );
-console.log( mySqrCalculatorES6.div(newArrES6) );
-console.log( mySqrCalculatorES6.mul(newArrES6) );
+console.log( mySqrCalculatorES6.sum(2, 2) );
+console.log( mySqrCalculatorES6.dif(2, 2) );
+console.log( mySqrCalculatorES6.div(2, 2) );
+console.log( mySqrCalculatorES6.mul(2, 2) );
