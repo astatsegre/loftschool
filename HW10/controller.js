@@ -16,13 +16,10 @@ var Controller = {
     },
     groupsRoute: function() {
         return Model.getGroups().then(function(groups) {
-//            console.log(groups);
             results.innerHTML = View.render('groups', {list: groups.items});
         })
     },
     photosRoute: function() {
-//        console.log('сработало!');
-//        console.log('сработало!');
         return Model.getPhotos().then(function(photos) {
 
             let neededCountOfQueries = Math.ceil(photos.count/200),
@@ -46,7 +43,6 @@ var Controller = {
                         return currentPhotos
                     }).then(function(currentPhotos) {
                     init++
-//                    console.log(currentPhotos);
                     return addPhotos(currentPhotos, init)
                     })
 
@@ -58,11 +54,7 @@ var Controller = {
                         });
                         let photosIdsStr = photosIds.join(',');
 
-                        console.log(photosIdsStr);
-
                         Model.getPhotosIds(photosIdsStr).then(function(idsOfPhotos) {
-
-                            console.log(idsOfPhotos);
 
                             currentPhotos.items.forEach(function(item, i, arr) {
                                item.commentsCount = idsOfPhotos[i].comments.count
