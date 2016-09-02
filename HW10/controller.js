@@ -60,8 +60,10 @@ var Controller = {
                                 let currentItemId = item.id,
                                     currentI = i;
                                 idsOfPhotos.forEach(function(item, i, arr) {
-                                    if(item.id === currentItemId) {
-                                        currentPhotos.items[currentI].commentsCount = item.comments.count;
+                                    if (item.comments.count != undefined) {
+                                        if(item.id === currentItemId) {
+                                            currentPhotos.items[currentI].commentsCount = item.comments.count;
+                                        }
                                     }
                                 })
                             });
