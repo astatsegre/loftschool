@@ -57,7 +57,13 @@ var Controller = {
                         Model.getPhotosIds(photosIdsStr).then(function(idsOfPhotos) {
 
                             currentPhotos.items.forEach(function(item, i, arr) {
-                               item.commentsCount = idsOfPhotos[i].comments.count
+                                let currentItemId = item.id,
+                                    currentI = i;
+                                idsOfPhotos.forEach(function(item, i, arr) {
+                                    if(item.id === currentItemId) {
+                                        currentPhotos.items[currentI].commentsCount = item.comments.count;
+                                    }
+                                })
                             });
                         }).then(function() {
                             results.innerHTML = View.render('photos', {list: currentPhotos.items});
